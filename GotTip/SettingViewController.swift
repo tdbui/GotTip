@@ -12,9 +12,11 @@ class SettingViewController: UIViewController {
 
     @IBOutlet weak var tipControl: UISegmentedControl!
     
+    @IBOutlet weak var colorControl: UISegmentedControl!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -25,6 +27,7 @@ class SettingViewController: UIViewController {
         let defaults = UserDefaults.standard
         let curr_tip = defaults.string(forKey: "tip") ?? "0.18"
         
+        // setting default tip amount
         switch curr_tip {
         case "0.2":
             tipControl.selectedSegmentIndex = 1
@@ -33,6 +36,20 @@ class SettingViewController: UIViewController {
         default:
             tipControl.selectedSegmentIndex = 0
         }
+        
+        
+        // setting default color theme
+        let curr_color = defaults.string(forKey: "color") ?? "day"
+        
+        switch curr_color {
+            case "blue":
+                colorControl.selectedSegmentIndex = 1
+            case "green":
+                colorControl.selectedSegmentIndex = 2
+            default:
+                colorControl.selectedSegmentIndex = 0
+        }
+        
     }
     
     
@@ -51,6 +68,21 @@ class SettingViewController: UIViewController {
         defaults.synchronize()
         
     }
+    
+
+
+    @IBAction func settingColorDefault(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        let color_themes = ["day", "blue", "green"]
+        
+        let default_color = color_themes[colorControl.selectedSegmentIndex]
+        defaults.set(default_color, forKey: "color")
+        defaults.synchronize()
+        
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
