@@ -50,8 +50,24 @@ class SettingViewController: UIViewController {
                 colorControl.selectedSegmentIndex = 0
         }
         
+        changeColor(newColor: curr_color)
+        
     }
     
+    
+    func changeColor(newColor: String) {
+        if(newColor == "blue") {
+            self.view.backgroundColor = UIColor(red: 0, green: 1, blue: 1, alpha: 1)
+            self.view.tintColor = UIColor.blue
+        }
+        else if(newColor == "green") {
+            self.view.backgroundColor = UIColor(red: 0.61, green: 1, blue: 0.46, alpha: 1)
+            self.view.tintColor = UIColor.black
+        }
+        else{
+            self.view.backgroundColor = UIColor.white
+            self.view.tintColor = UIColor.blue        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -78,6 +94,7 @@ class SettingViewController: UIViewController {
         let default_color = color_themes[colorControl.selectedSegmentIndex]
         defaults.set(default_color, forKey: "color")
         defaults.synchronize()
+        changeColor(newColor: default_color)
         
     }
     
